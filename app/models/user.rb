@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   #before_save { self.email.downcase! } 
   
   before_save { |user| user.email = email.downcase }
+  before_save :create_remember_token
   
   #describe "email address with mixed case" do
   #let(:mixed_case_email) { "Foo@ExamPle.COm" }
@@ -31,5 +32,10 @@ class User < ActiveRecord::Base
     validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
     validates :password, presence: true, length: { minimum: 6 }
     validates :password_confirmation, presence: true
+    
+   private
 
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
+    end
 end

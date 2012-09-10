@@ -1,5 +1,8 @@
-<%= @user.name %>  <%= @user.email %>
+<!--<%= @user.name %>  <%= @user.email %>--> 
+
+
 <% provide(:title, @user.name) %>
+<h1><%= @user.name %></h1>
 <div class="row">
 <aside class ="span4">
 <section>
